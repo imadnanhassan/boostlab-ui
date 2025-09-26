@@ -4,23 +4,46 @@
 @theme {
   --font-sans: "Baloo Da 2", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 
-  --color-background: #000;
-  --color-foreground: #fff;
-  --color-accent: #f5f5f5;
+  /* Dark theme as default */
+  --background: #0a0a0a;
+  --foreground: #fafafa;
 
-  --text-base: 16px;
+  --surface-0: #0e0e0e; /* navbar */
+  --surface-1: #121212; /* section */
+  --surface-2: #181818; /* card */
+  --border: #2a2a2a;
+
+  --muted-foreground: #b3b3b3;
+  --primary: #ffffff;
+  --accent: #f5f5f5;
+
   --container-max: 1200px;
 }
 
+/* Light theme overrides */
+:root[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+
+  --surface-0: #ffffffcc; /* navbar with slight translucency */
+  --surface-1: #ffffff;
+  --surface-2: #f7f7f7;
+  --border: #e6e6e6;
+
+  --muted-foreground: #4a4a4a;
+  --primary: #000000;
+  --accent: #111111;
+}
+
 :root {
-  color-scheme: dark;
+  color-scheme: dark light;
 }
 
 html,
 body {
   height: 100%;
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-sans);
 }
 
@@ -31,19 +54,36 @@ body {
   padding-inline: 1rem;
 }
 
-/* Light theme */
-:root[data-theme="light"] {
-  --color-background: #ffffff;
-  --color-foreground: #000000;
-  --color-accent: #f5f5f5;
+/* Background helpers */
+.bg-surface-0 {
+  background-color: var(--surface-0);
+}
+.bg-surface-1 {
+  background-color: var(--surface-1);
+}
+.bg-surface-2 {
+  background-color: var(--surface-2);
+}
+.border-default {
+  border-color: var(--border);
+}
+.text-muted {
+  color: var(--muted-foreground);
 }
 
-/* Subtle animated gradient background utility */
+/* Subtle animated gradient background utility for banner */
 .bg-animated {
-  background: radial-gradient(1200px 600px at 10% 10%, #111, transparent),
-    radial-gradient(1000px 500px at 90% 20%, #0a0a0a, transparent),
-    radial-gradient(800px 400px at 30% 80%, #151515, transparent);
+  background:
+    radial-gradient(1200px 600px at 10% 10%, #1a1a1a, transparent),
+    radial-gradient(1000px 500px at 90% 20%, #0f0f0f, transparent),
+    radial-gradient(800px 400px at 30% 80%, #202020, transparent);
   animation: float 12s ease-in-out infinite alternate;
+}
+:root[data-theme="light"] .bg-animated {
+  background:
+    radial-gradient(1000px 500px at 10% 10%, #f2f2f2, transparent),
+    radial-gradient(900px 450px at 90% 20%, #eaeaea, transparent),
+    radial-gradient(800px 400px at 30% 80%, #f5f5f5, transparent);
 }
 
 @keyframes float {
@@ -64,28 +104,62 @@ body {
 /* Buttons */
 .btn {
   @apply inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold transition;
-  background: #fff;
-  color: #000;
+  background: var(--primary);
+  color: var(--background);
 }
-:root[data-theme="light"] .btn {
-  background: #000;
-  color: #fff;
+.btn:hover {
+  filter: brightness(0.9);
 }
 .btn-outline {
-  @apply border border-white/20 hover:border-white/40;
+  @apply border px-5 py-2.5 text-sm font-semibold rounded-md transition;
+  border-color: var(--border);
   background: transparent;
-  color: var(--color-foreground);
+  color: var(--foreground);
+}
+.btn-outline:hover {
+  background: color-mix(in oklab, var(--foreground) 8%, transparent);
+}
+
+/* Premium gradient button */
+.btn-gradient {
+  @apply inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold transition;
+  background: linear-gradient(135deg, #fff, #cfcfcf);
+  color: #000;
+}
+:root[data-theme="light"] .btn-gradient {
+  background: linear-gradient(135deg, #000, #333);
+  color: #fff;
 }
 
 /* Cards */
 .card {
-  @apply rounded-xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition;
+  @apply rounded-xl p-6 transition;
+  background: color-mix(in oklab, var(--surface-2) 92%, transparent);
+  border: 1px solid var(--border);
+}
+.card:hover {
+  background: color-mix(in oklab, var(--surface-2) 100%, transparent);
+}
+
+/* Glass card for premium UI */
+.card-glass {
+  @apply rounded-2xl p-6 transition;
+  background: color-mix(in oklab, var(--surface-2) 85%, transparent);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px color-mix(in oklab, #000 15%, transparent);
+  backdrop-filter: blur(6px);
 }
 
 /* Links */
 a.navlink {
-  @apply text-sm font-medium text-white/80 hover:text-white transition;
+  @apply text-sm font-medium transition;
+  color: var(--muted-foreground);
 }
-:root[data-theme="light"] a.navlink {
-  @apply text-black/80 hover:text-black;
+a.navlink:hover {
+  color: var(--foreground);
+}
+
+/* Section spacing */
+.section {
+  @apply py-16 md:py-24;
 }
