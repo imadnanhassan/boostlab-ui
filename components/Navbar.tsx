@@ -16,22 +16,26 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur bg-black/50">
+    <header className="sticky top-0 z-50 border-b border-default backdrop-blur bg-surface-0/80">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="text-xl font-extrabold tracking-tight">
           BoostLab
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`navlink ${pathname === l.href ? "text-white" : ""}`}
-            >
-              {l.label}
-            </Link>
-          ))}
+          {links.map((l) => {
+            const active = pathname === l.href;
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`navlink ${active ? "text-foreground" : ""}`}
+                aria-current={active ? "page" : undefined}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">

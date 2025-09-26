@@ -26,7 +26,8 @@ export default function ThemeToggle() {
     <button
       aria-label="Toggle theme"
       onClick={toggle}
-      className="rounded-md border border-white/20 px-3 py-2 text-xs text-white/80 hover:text-white transition"
+      className="rounded-md border border-default px-3 py-2 text-xs transition"
+      style={{ color: "var(--muted-foreground)" }}
     >
       {theme === "dark" ? "Light Mode" : "Dark Mode"}
     </button>

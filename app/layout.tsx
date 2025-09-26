@@ -55,6 +55,16 @@ export const metadata: Metadata = {
   },
 };
 
+const NoFlashTheme = `
+(function() {
+  try {
+    var saved = localStorage.getItem('theme');
+    if (!saved) return;
+    document.documentElement.setAttribute('data-theme', saved);
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({
   children,
 }: {
@@ -62,9 +72,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="bn" suppressHydrationWarning>
-      <body
-        className={`${baloo.variable} antialiased min-h-screen flex flex-col`}
-      >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: NoFlashTheme }} />
+      </head>
+      <body className={`${baloo.variable} antialiased min-h-screen flex flex-col`}>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
