@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Baloo_Da_2 } from "next/font/google";
-import Link from "next/link";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -23,8 +23,7 @@ export const metadata: Metadata = {
     default: "BoostLab – আপনার ডিজিটাল গ্রোথ ল্যাব",
     template: "%s | BoostLab",
   },
-  description:
-    "ওয়েবসাইট, বিজ্ঞাপন ও সোশ্যাল মিডিয়া গ্রোথ – সব এক জায়গায়।",
+  description: "ওয়েবসাইট, বিজ্ঞাপন ও সোশ্যাল মিডিয়া গ্রোথ – সব এক জায়গায়।",
   applicationName: "BoostLab",
   keywords: [
     "BoostLab",
@@ -36,8 +35,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "BoostLab – আপনার ডিজিটাল গ্রোথ ল্যাব",
-    description:
-      "ওয়েবসাইট, বিজ্ঞাপন ও সোশ্যাল মিডিয়া গ্রোথ – সব এক জায়গায়।",
+    description: "ওয়েবসাইট, বিজ্ঞাপন ও সোশ্যাল মিডিয়া গ্রোথ – সব এক জায়গায়।",
     type: "website",
     url: "https://boostlab.example.com",
     siteName: "BoostLab",
@@ -46,8 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "BoostLab – আপনার ডিজিটাল গ্রোথ ল্যাব",
-    description:
-      "ওয়েবসাইট, বিজ্ঞাপন ও সোশ্যাল মিডিয়া গ্রোথ – সব এক জায়গায়।",
+    description: "ওয়েবসাইট, বিজ্ঞাপন ও সোশ্যাল মিডিয়া গ্রোথ – সব এক জায়গায়।",
     images: ["/og"],
   },
   icons: {
@@ -65,7 +62,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="bn" suppressHydrationWarning>
-      <body className={`${baloo.variable} antialiased min-h-screen flex flex-col`}>
+      <body
+        className={`${baloo.variable} antialiased min-h-screen flex flex-col`}
+      >
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
